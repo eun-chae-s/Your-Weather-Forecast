@@ -1,6 +1,6 @@
 html {
   height: 100%;
-  background: linear-gradient(white 0 60%, darkturquoise 100%);
+  background: linear-gradient(white 0 70%, #dccaf5 100%);
 }
 
 .header {
@@ -10,12 +10,13 @@ html {
   text-align: center;
   font-size: 30px;
   /* Change the color of title depending on the season */
-  color: darkturquoise;
+  color: #dccaf5;
+  font-family: monospace;
 }
 
 .search {
   height: 50px;
-  width: 500px;
+  width: 600px;
   margin: 0 auto;
   margin-bottom: 30px;
   position: relative;
@@ -25,22 +26,118 @@ html {
 }
 
 .search input {
+  width: 500px;
   padding: 10px;
   font-size: 20px;
   float: left;
+  font-family: monospace;
 }
 
 .search button {
-  font-size: 25px;
+  background-color: #dccaf5;
+  border: none;
+  width: 100px;
+  font-size: 27px;
   float: left;
+  box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.24);
+  transition-duration: all 0.3s ease;
+  cursor: pointer;
+}
+
+.search button:hover {
+  background-color: white;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .weather {
-  height: 300px;
-  width: 500px;
+  height: 800px;
   margin: auto;
-  background-color: blue;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#today {
+  float: left;
+  height: 70%;
+  width: 40%;
+  margin-right: 25px;
+  background-color: #fce1e4;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  overflow: auto;
+  align-items: center;
+  text-align: center;
+}
+
+#today img {
+  width: 200px;
+  height: 200px;
+  margin-top: 50px;
+}
+
+.not-today {
+  float: left;
+  height: 70%;
+  width: 40%;
+  margin-left: 25px;
+}
+
+#tmr {
+  height: 35%;
+  margin-bottom: 25px;
+  background-color: #e8f8bf;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  overflow: auto;
+  text-align: center;
+}
+
+#tmr img {
+  width: 100px;
+  height: 90px;
+}
+
+#day-after-tmr {
+  height: 35%;
+  margin-top: 25px;
+  background-color: #fcf4dd;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  overflow: auto;
+  text-align: center;
+}
+
+#day-after-tmr img {
+  width: 100px;
+  height: 90px;
+}
+
+#extra {
+  height: 20%;
+  margin-top: 25px;
+  background-color: #daeaf6;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  overflow: auto;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+#credit {
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  border: none;
+  transition-duration: all 0.3s ease;
+  cursor: pointer;
+  color: white;
+  background-color: #986ad8;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#credit:hover {
+  background-color: white;
+  color: #986ad8;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
