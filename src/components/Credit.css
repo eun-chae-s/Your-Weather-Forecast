@@ -1,0 +1,23 @@
+.credit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(95, 67, 172, 0.288);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.credit-content {
+  width: 700px;
+  height: 900px;
+  position: fixed;
+  top: 10%;
+  left: auto;
+  border-color: rgb(147, 123, 252);
+  border-style: solid;
+  background-color: white;
+  display: block;
+  text-align: center;
+}

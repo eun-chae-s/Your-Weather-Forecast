@@ -10,7 +10,7 @@ html {
   text-align: center;
   font-size: 30px;
   /* Change the color of title depending on the season */
-  color: #dccaf5;
+  color: #986ad8;
   font-family: monospace;
 }
 
@@ -35,9 +35,11 @@ html {
 
 .search button {
   background-color: #dccaf5;
+  color: white;
   border: none;
   width: 100px;
-  font-size: 27px;
+  height: 45px;
+  font-size: 25px;
   float: left;
   box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.24);
   transition-duration: all 0.3s ease;
@@ -46,11 +48,12 @@ html {
 
 .search button:hover {
   background-color: white;
+  color: #dccaf5;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .weather {
-  height: 800px;
+  height: 700px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -83,7 +86,7 @@ html {
 }
 
 #tmr {
-  height: 35%;
+  height: 38%;
   margin-bottom: 25px;
   background-color: #e8f8bf;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -97,7 +100,7 @@ html {
 }
 
 #day-after-tmr {
-  height: 35%;
+  height: 38%;
   margin-top: 25px;
   background-color: #fcf4dd;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -111,7 +114,7 @@ html {
 }
 
 #extra {
-  height: 20%;
+  height: 14%;
   margin-top: 25px;
   background-color: #daeaf6;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -139,5 +142,77 @@ footer {
 #credit:hover {
   background-color: white;
   color: #986ad8;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.result {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+.result h2 {
+  color: #986ad8;
+  font-size: 30px;
+  font-family: monospace;
+  animation-duration: 2s;
+  animation-name: textslidein;
+}
+
+@keyframes textslidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+#today-info {
+  margin: auto;
+  margin-top: 30px;
+}
+
+#today-info a {
+  font-size: 20px;
+  font-family: monospace;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#tmr-info,
+#after-tmr-info {
+  display: inline-block;
+  margin: auto;
+  margin-left: 5%;
+}
+
+#tmr-info a,
+#after-tmr-info a {
+  font-size: 18px;
+  font-family: monospace;
+  margin: 10px;
+}
+
+#info {
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  border: none;
+  transition-duration: all 0.3s ease;
+  cursor: pointer;
+  color: white;
+  background-color: #6a7bd8;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#info:hover {
+  background-color: white;
+  color: #6a7bd8;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
