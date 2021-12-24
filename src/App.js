@@ -2,30 +2,38 @@ import React, {useState} from 'react';
 import './App.css';
 import rainy from './img/rainy.png';
 import cloudSunny from './img/sun.png';
-import snow from './img/snowing.png';
+import snow from './img/snowman.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSnowman, faUmbrella, faMap} from '@fortawesome/free-solid-svg-icons';
 import Info from './components/Info';
 import Credit from './components/Credit';
 
-// TODO: make a separate page for the credit
-
 function App() {
+  const [inputLocation, setInputLocation] = useState('');
   const [showCredit, setShowCredit] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+
+  const inputLocationHandler = (e) => {
+    setInputLocation(e.target.value);
+  }
+
+  const getWeatherData = () => {
+    return "Hello";
+  };
+
   return (
     <div>
       <div className="header">
         <h1>ONEUL</h1>
       </div>
       <div className="search">
-        <input type="text" placeholder="Location..?"></input>
-        {/* 버튼을 클릭하면 텍스트 애니메이션 효과 보이게 하기! */}
-        <button type="submit"><FontAwesomeIcon icon={faMap}></FontAwesomeIcon></button>
+        <input type="text" placeholder="Location..?" onChange={inputLocationHandler}></input>
+        {/* 버튼을 클릭하면 텍스트 애니메이션 효과 보이게 하기! function 만들어서 처음에는 null로 하고 나중에 추가하기 */}
+        <button onClick={getWeatherData}><FontAwesomeIcon icon={faMap}></FontAwesomeIcon></button>
       </div>
       {/* Get the input text from the input text */}
       <div className="result">
-        <h2>Location's ONEUL...</h2>
+        <h2>{inputLocation}'s ONEUL...</h2>
       </div>
       <div className="weather">
         <div id="today">

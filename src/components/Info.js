@@ -13,7 +13,8 @@ function Info({onCloseInfo, showInfo}) {
                     <h1>Info</h1>
                 </div>
                 <div className="detail">
-                    <h3><b>Developer:</b> Rachel Seong</h3>
+                    Developer: Rachel Seong <br></br>
+                    <p>You can see minimum & maximum temperature, volume of rain and snow in 3 hours</p>
                 </div>
                 <div className="close">
                     <button id="close" onClick={onCloseInfo}>

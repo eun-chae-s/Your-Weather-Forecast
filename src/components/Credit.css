@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(95, 67, 172, 0.288);
+  background-color: #dbecf49f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,9 +15,38 @@
   position: fixed;
   top: 10%;
   left: auto;
-  border-color: rgb(147, 123, 252);
+  border-color: #5f84a2;
   border-style: solid;
   background-color: white;
   display: block;
   text-align: center;
+}
+.credit-content h1 {
+  font-family: monospace;
+  font-size: 30px;
+}
+
+.detail {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+#close {
+  background-color: #5f84a2;
+  color: white;
+  width: 150px;
+  height: 40px;
+  margin: 20px;
+  font-size: 20px;
+  font-family: monospace;
+  transition-duration: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#close:hover {
+  color: #5f84a2;
+  background-color: white;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }

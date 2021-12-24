@@ -14,7 +14,7 @@ function Credit({onCloseCredit, showCredit}) {
                 </div>
                 <div className="detail">
                     <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    <div>Icons made by <a href="https://www.flaticon.com/authors/iconbaandar" title="IconBaandar">IconBaandar</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     <div>Icons made by <a href="https://www.flaticon.com/authors/winnievinzence" title="winnievinzence">winnievinzence</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 </div>
                 <div className="close">

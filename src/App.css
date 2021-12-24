@@ -1,6 +1,8 @@
+/* Winter: #194569, #5F84A2, #91AEC4, #B7d0E1, #cadeed, #dbecf4, #cadeed,  */
+
 html {
   height: 100%;
-  background: linear-gradient(white 0 70%, #dccaf5 100%);
+  background: linear-gradient(white 0 70%, #194569 100%);
 }
 
 .header {
@@ -10,7 +12,7 @@ html {
   text-align: center;
   font-size: 30px;
   /* Change the color of title depending on the season */
-  color: #986ad8;
+  color: #194569;
   font-family: monospace;
 }
 
@@ -31,10 +33,12 @@ html {
   font-size: 20px;
   float: left;
   font-family: monospace;
+  border-style: solid;
+  border-color: #194569;
 }
 
 .search button {
-  background-color: #dccaf5;
+  background-color: #194569;
   color: white;
   border: none;
   width: 100px;
@@ -48,7 +52,7 @@ html {
 
 .search button:hover {
   background-color: white;
-  color: #dccaf5;
+  color: #194569;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -65,11 +69,12 @@ html {
   height: 70%;
   width: 40%;
   margin-right: 25px;
-  background-color: #fce1e4;
+  background-color: #5f84a2;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   overflow: auto;
   align-items: center;
   text-align: center;
+  color: white;
 }
 
 #today img {
@@ -88,7 +93,7 @@ html {
 #tmr {
   height: 38%;
   margin-bottom: 25px;
-  background-color: #e8f8bf;
+  background-color: #91aec4;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   overflow: auto;
   text-align: center;
@@ -102,7 +107,7 @@ html {
 #day-after-tmr {
   height: 38%;
   margin-top: 25px;
-  background-color: #fcf4dd;
+  background-color: #cadeed;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   overflow: auto;
   text-align: center;
@@ -116,7 +121,7 @@ html {
 #extra {
   height: 14%;
   margin-top: 25px;
-  background-color: #daeaf6;
+  background-color: #b7d0e1;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   overflow: auto;
   text-align: center;
@@ -134,14 +139,14 @@ footer {
   border: none;
   transition-duration: all 0.3s ease;
   cursor: pointer;
-  color: white;
-  background-color: #986ad8;
+  color: black;
+  background-color: #dbecf4;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 #credit:hover {
-  background-color: white;
-  color: #986ad8;
+  background-color: black;
+  color: #dbecf4;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -149,10 +154,11 @@ footer {
   text-align: center;
   margin-top: 50px;
   margin-bottom: 0px;
+  visibility: hidden;
 }
 
 .result h2 {
-  color: #986ad8;
+  color: #194569;
   font-size: 30px;
   font-family: monospace;
   animation-duration: 2s;
@@ -177,7 +183,7 @@ footer {
 }
 
 #today-info a {
-  font-size: 20px;
+  font-size: 23px;
   font-family: monospace;
   margin-left: 5%;
   margin-right: 5%;
@@ -192,7 +198,7 @@ footer {
 
 #tmr-info a,
 #after-tmr-info a {
-  font-size: 18px;
+  font-size: 20px;
   font-family: monospace;
   margin: 10px;
 }
@@ -206,13 +212,13 @@ footer {
   border: none;
   transition-duration: all 0.3s ease;
   cursor: pointer;
-  color: white;
-  background-color: #6a7bd8;
+  color: black;
+  background-color: #cadeed;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 #info:hover {
-  background-color: white;
-  color: #6a7bd8;
+  background-color: black;
+  color: #cadeed;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
