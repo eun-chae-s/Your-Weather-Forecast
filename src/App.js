@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import rainy from './img/rainy.png';
 import cloudSunny from './img/sun.png';
@@ -8,17 +8,45 @@ import {faSnowman, faUmbrella, faMap} from '@fortawesome/free-solid-svg-icons';
 import Info from './components/Info';
 import Credit from './components/Credit';
 
-function App() {
+function App(){
+  const [weather, setWeather] = useState({});
   const [inputLocation, setInputLocation] = useState('');
   const [showCredit, setShowCredit] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
 
-  const inputLocationHandler = (e) => {
-    setInputLocation(e.target.value);
-  }
+  // // tell React that your component needs to do something after render
+  useEffect(() => {
+    getWeatherData();
+  }, []);
 
-  const getWeatherData = () => {
-    return "Hello";
+  function getWeatherData() {
+    if (inputLocation === '') {
+      return null;
+    }
+
+    const city = inputLocation;
+    console.log(city);
+
+    // Call API to obtain the data
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&APPID=684d6190d51254617c2a54e8dcec9715&units=metric`
+    ).then((res) => {
+      if (res.ok) {
+        console.log(city);
+        console.log(res.status);
+        return res.json();
+      } else {
+        if (res.status === 404) {
+          return alert("Oops, there seems to be an error! (wrong location)");
+        } else {
+          throw new Error("You have an error");
+        }
+      }
+    }).then((object) => {
+      console.log(city);
+      setWeather(object);
+      console.log(weather);
+    }).catch((error) => console.log(error));
   };
 
   return (
@@ -27,7 +55,7 @@ function App() {
         <h1>ONEUL</h1>
       </div>
       <div className="search">
-        <input type="text" placeholder="Location..?" onChange={inputLocationHandler}></input>
+        <input id="city" type="text" placeholder="City, Country" value={inputLocation} onChange={(e) => setInputLocation(e.target.value)}></input>
         {/* 버튼을 클릭하면 텍스트 애니메이션 효과 보이게 하기! function 만들어서 처음에는 null로 하고 나중에 추가하기 */}
         <button onClick={getWeatherData}><FontAwesomeIcon icon={faMap}></FontAwesomeIcon></button>
       </div>
