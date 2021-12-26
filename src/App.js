@@ -29,7 +29,7 @@ function App(){
 
     // Call API to obtain the data
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&APPID=684d6190d51254617c2a54e8dcec9715&units=metric`
+      {OpenweatherappApiKey}
     ).then((res) => {
       if (res.ok) {
         console.log(city);
