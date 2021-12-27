@@ -34,7 +34,7 @@ function App(){
 
     // Call API to obtain the data; last step
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&APPID={apikey}&units=metric`
+      {OpenweatherappApiKey}
     ).then((res) => {
       if (res.ok) {
         console.log(res.status);
