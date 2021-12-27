@@ -9,6 +9,7 @@ import WeatherCard from './components/WeatherCard';
 
 function App(){
   const [todayWeather, setTodayWeather] = useState({});
+  const [notTodayWeather, setNotTodayWeather] = useState({});
   const [inputLocation, setInputLocation] = useState('');
   const [showCredit, setShowCredit] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
@@ -22,19 +23,12 @@ function App(){
 
   // // tell React that your component needs to do something after render
   function getWeatherData() {
-    console.log("1.")
-    console.log(todayWeather);
     if (inputLocation === '') {
       return null;
     }
 
-    const city = inputLocation;
-    console.log("2.")
-    console.log(city);
-
-    // Call API to obtain the data; last step
     fetch(
-      {OpenweatherappApiKey}
+      `http://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&appid=684d6190d51254617c2a54e8dcec9715&units=metric`
     ).then((res) => {
       if (res.ok) {
         console.log(res.status);
@@ -48,9 +42,29 @@ function App(){
       }
     }).then((object) => {
       setTodayWeather(object);
-      console.log("3.");
+      console.log("today");
       console.log(object);
-      console.log(todayWeather);
+      setShowWeather(true);
+      setShowWeatherCard(true);
+    }).catch((error) => console.log(error));
+
+    fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?q=${inputLocation}&appid=684d6190d51254617c2a54e8dcec9715&units=metric`
+    ).then((res) => {
+      if (res.ok) {
+        console.log(res.status);
+        return res.json();
+      } else {
+        if (res.status === 404) {
+          return alert("Oops, there seems to be an error! (wrong location)");
+        } else {
+          throw new Error("You have an error");
+        }
+      }
+    }).then((object) => {
+      setNotTodayWeather(object);
+      console.log("not today");
+      console.log(object);
       setShowWeather(true);
       setShowWeatherCard(true);
     }).catch((error) => console.log(error));
@@ -71,9 +85,9 @@ function App(){
       </City>
       <WeatherCard
         todayWeather={todayWeather}
+        notTodayWeather={notTodayWeather}
         showWeatherCard={showWeatherCard}>
       </WeatherCard>
-      {/* Make a separate credit page that displays all the references */}
       <footer>
         <button id="credit" type="button" onClick={() => setShowCredit(true)}>Credit</button>
         <Credit

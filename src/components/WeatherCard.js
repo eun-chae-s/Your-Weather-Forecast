@@ -12,7 +12,7 @@ import mist from '/Users/macbookair/Desktop/University of Toronto/2nd Year/Cours
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSnowman, faUmbrella} from '@fortawesome/free-solid-svg-icons';
 
-function WeatherCard({todayWeather, showWeatherCard}) {
+function WeatherCard({todayWeather, notTodayWeather, showWeatherCard}) {
     if (showWeatherCard === false) {
         return null;
     }
@@ -20,34 +20,59 @@ function WeatherCard({todayWeather, showWeatherCard}) {
         return null;
     } else {
 
-    var todayImage;
+    //  Choose the right image of the weather
+    function findRightImage(id) {
+        if (id === 800) {
+            return sunny;
+        } else if (id === 801) {
+            return cloudSunny;
+        } else if (id === 802) {
+            return lightCloud;
+        } else if (id >= 803 && id <= 804) {
+            return clouds;
+        } else if (id >= 600 && id <= 622) {
+            return snow;
+        } else if (id >= 500 && id <= 511) {
+            return rainy;
+        } else if (id >= 520 && id <= 531) {
+            return shower;
+        } else if (id >= 300 && id <= 321) {
+            return drizzle;
+        } else if (id >= 200 && id <= 232) {
+            return thunderstorm;
+        } else {
+            return mist;
+        }
+    }
+        
     const curr = todayWeather.main.temp;
     const todayMin = todayWeather.main.temp_min;
     const todayMax = todayWeather.main.temp_max;
+    const todayImage = findRightImage(todayWeather.weather[0].id);
 
-    const weatherDescription = todayWeather.weather[0].id;
-    if (weatherDescription === 800) {
-        todayImage = sunny;
-    } else if (weatherDescription === 801) {
-        todayImage = cloudSunny;
-    } else if (weatherDescription === 802) {
-        todayImage = lightCloud;
-    } else if (803 <= weatherDescription <= 804) {
-        todayImage = clouds;
-    } else if (600 <= weatherDescription <= 622) {
-        todayImage = snow;
-    } else if (500 <= weatherDescription <= 511) {
-        todayImage = rainy;
-    } else if (520 <= weatherDescription <= 531) {
-        todayImage = shower;
-    } else if (300 <= weatherDescription <= 321) {
-        todayImage = drizzle;
-    } else if (200 <= weatherDescription <= 232) {
-        todayImage = thunderstorm;
+    // Find the specific timezone and use it to convert
+    const todayDate = new Date().toLocaleDateString('en-CA');
+    console.log(todayDate);
+    const lastDigit = new Date().toLocaleDateString('en-CA').slice(9, 10);
+    const lastTwoDigit = new Date().toLocaleDateString('en-CA').slice(8, 10);
+    var tomorrowDate;
+    var dayAfterDate;
+    if (parseInt(lastDigit) <= 7) {
+        tomorrowDate = new Date().toLocaleDateString('en-CA').slice(0, 9) + (parseInt(lastDigit) + 1);
+        dayAfterDate = new Date().toLocaleDateString('en-CA').slice(0, 9) + (parseInt(lastDigit) + 2);
+    } else if (parseInt(lastDigit) === 8) {
+        tomorrowDate = new Date().toLocaleDateString('en-CA').slice(0, 9) + (parseInt(lastDigit) + 1);
+        dayAfterDate = new Date().toLocaleDateString('en-CA').slice(0, 8) + (parseInt(lastTwoDigit) + 2);
     } else {
-        todayImage = mist;
+        tomorrowDate = new Date().toLocaleDateString('en-CA').slice(0, 8) + (parseInt(lastTwoDigit) + 1);
+        dayAfterDate = new Date().toLocaleDateString('en-CA').slice(0, 8) + (parseInt(lastTwoDigit) + 2);
     }
 
+    // Filter Tomorrow's data
+    // 1. Find the min and max temperature & population
+
+    // Filter Day after tomorrow's data
+    
     return (
         <div>
             <div className="weather">
@@ -56,17 +81,18 @@ function WeatherCard({todayWeather, showWeatherCard}) {
                     <img src={ todayImage }></img>
                     <div id="today-info">
                         <p>
-                            <a><b>{curr} &#8451;</b></a>
-                            <a>{todayMin} &#8451; </a>
-                            <a>{todayMax} &#8451;</a>
+                            <a><b>now: {curr} &#8451;</b></a>
+                            
                         </p>
                         <p>
-                        <a>
+                            <a>min: {todayMin} &#8451; </a>
+                            <a>max: {todayMax} &#8451;</a>
+                        {/* <a>
                             <FontAwesomeIcon icon={faUmbrella}></FontAwesomeIcon>: 2 mm
                         </a>
                         <a>
                             <FontAwesomeIcon icon={faSnowman}></FontAwesomeIcon>: 2 mm
-                        </a>
+                        </a> */}
                         </p>
                     </div>
                 </div>
