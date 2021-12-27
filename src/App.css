@@ -64,6 +64,32 @@ html {
   justify-content: center;
 }
 
+.result {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+.result h2 {
+  color: #194569;
+  font-size: 30px;
+  font-family: monospace;
+  animation-duration: 2s;
+  animation-name: textslidein;
+}
+
+@keyframes textslidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
 #today {
   float: left;
   height: 70%;
@@ -148,33 +174,6 @@ footer {
   background-color: black;
   color: #dbecf4;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-
-.result {
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 0px;
-  visibility: hidden;
-}
-
-.result h2 {
-  color: #194569;
-  font-size: 30px;
-  font-family: monospace;
-  animation-duration: 2s;
-  animation-name: textslidein;
-}
-
-@keyframes textslidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
 }
 
 #today-info {

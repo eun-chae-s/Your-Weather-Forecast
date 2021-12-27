@@ -1,38 +1,42 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import rainy from './img/rainy.png';
-import cloudSunny from './img/sun.png';
-import snow from './img/snowman.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSnowman, faUmbrella, faMap} from '@fortawesome/free-solid-svg-icons';
+import {faMap} from '@fortawesome/free-solid-svg-icons';
 import Info from './components/Info';
 import Credit from './components/Credit';
+import City from './components/City';
+import WeatherCard from './components/WeatherCard';
 
 function App(){
-  const [weather, setWeather] = useState({});
+  const [todayWeather, setTodayWeather] = useState({});
   const [inputLocation, setInputLocation] = useState('');
   const [showCredit, setShowCredit] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [showWeather, setShowWeather] = useState(false);
+  const [showWeatherCard, setShowWeatherCard] = useState(false);
+
+  const inputLocationHandler = (e) => {
+    setInputLocation(e.target.value);
+    setShowWeather(false);
+  }
 
   // // tell React that your component needs to do something after render
-  useEffect(() => {
-    getWeatherData();
-  }, []);
-
   function getWeatherData() {
+    console.log("1.")
+    console.log(todayWeather);
     if (inputLocation === '') {
       return null;
     }
 
     const city = inputLocation;
+    console.log("2.")
     console.log(city);
 
-    // Call API to obtain the data
+    // Call API to obtain the data; last step
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&APPID=684d6190d51254617c2a54e8dcec9715&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&APPID=684d6190d51254617c2a54e8dcec9715&units=metric`
     ).then((res) => {
       if (res.ok) {
-        console.log(city);
         console.log(res.status);
         return res.json();
       } else {
@@ -43,9 +47,12 @@ function App(){
         }
       }
     }).then((object) => {
-      console.log(city);
-      setWeather(object);
-      console.log(weather);
+      setTodayWeather(object);
+      console.log("3.");
+      console.log(object);
+      console.log(todayWeather);
+      setShowWeather(true);
+      setShowWeatherCard(true);
     }).catch((error) => console.log(error));
   };
 
@@ -55,74 +62,17 @@ function App(){
         <h1>ONEUL</h1>
       </div>
       <div className="search">
-        <input id="city" type="text" placeholder="City, Country" value={inputLocation} onChange={(e) => setInputLocation(e.target.value)}></input>
-        {/* 버튼을 클릭하면 텍스트 애니메이션 효과 보이게 하기! function 만들어서 처음에는 null로 하고 나중에 추가하기 */}
+        <input id="city" type="text" placeholder="City, Country" value={inputLocation} onChange={inputLocationHandler}></input>
         <button onClick={getWeatherData}><FontAwesomeIcon icon={faMap}></FontAwesomeIcon></button>
       </div>
-      {/* Get the input text from the input text */}
-      <div className="result">
-        <h2>{inputLocation}'s ONEUL...</h2>
-      </div>
-      <div className="weather">
-        <div id="today">
-          <h2>Today</h2>
-          <img src={ rainy } alt="rainy"></img>
-          <div id="today-info">
-            <p>
-              <a>-5 &#8451; </a>
-              <a>20 &#8451;</a></p>
-            <p>
-              <a>
-                <FontAwesomeIcon icon={faUmbrella}></FontAwesomeIcon>: 2 mm
-              </a>
-              <a>
-                <FontAwesomeIcon icon={faSnowman}></FontAwesomeIcon>: 2 mm
-              </a>
-            </p>
-          </div>
-        </div>
-        <div className="not-today">
-          <div id="tmr">
-            <h2>Tomorrow</h2>
-            <img src={ cloudSunny } alt="Cloudy and Sunny"></img>
-            <div id="tmr-info">
-              <p>
-                <a>-5 &#8451; </a>
-                <a>20 &#8451;</a></p>
-              <p>
-                <a>
-                  <FontAwesomeIcon icon={faUmbrella}></FontAwesomeIcon>: 2 mm
-                </a>
-                <a>
-                  <FontAwesomeIcon icon={faSnowman}></FontAwesomeIcon>: 2 mm
-                </a>
-              </p>
-            </div>
-          </div>
-          <div id="day-after-tmr">
-            <h2>Friday</h2>
-            <img src={ snow } alt="Snow"></img>
-            <div id="after-tmr-info">
-            <p>
-              <a>-5 &#8451; </a>
-              <a>20 &#8451;</a>
-            </p>
-            <p>
-              <a>
-                <FontAwesomeIcon icon={faUmbrella}></FontAwesomeIcon>: 2 mm
-              </a>
-              <a>
-                <FontAwesomeIcon icon={faSnowman}></FontAwesomeIcon>: 2 mm
-              </a>
-            </p>
-            </div>
-          </div>
-          <div id="extra">
-            <h2>Feedback?</h2>
-          </div>
-        </div>
-        
-      </div>
+      <City 
+        inputLocation={inputLocation}
+        showWeather={showWeather}>
+      </City>
+      <WeatherCard
+        todayWeather={todayWeather}
+        showWeatherCard={showWeatherCard}>
+      </WeatherCard>
       {/* Make a separate credit page that displays all the references */}
       <footer>
         <button id="credit" type="button" onClick={() => setShowCredit(true)}>Credit</button>
