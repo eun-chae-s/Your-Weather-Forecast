@@ -12,7 +12,7 @@ import mist from '/Users/macbookair/Desktop/University of Toronto/2nd Year/Cours
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSnowman, faUmbrella} from '@fortawesome/free-solid-svg-icons';
 
-function WeatherCard({todayWeather, notTodayWeather, showWeatherCard}) {
+function WeatherCard({todayDate, todayWeather, notTodayWeather, showWeatherCard}) {
     if (showWeatherCard === false) {
         return null;
     }
@@ -44,15 +44,13 @@ function WeatherCard({todayWeather, notTodayWeather, showWeatherCard}) {
             return mist;
         }
     }
-        
+    
     const curr = todayWeather.main.temp;
     const todayMin = todayWeather.main.temp_min;
     const todayMax = todayWeather.main.temp_max;
     const todayImage = findRightImage(todayWeather.weather[0].id);
 
     // Find the specific timezone and use it to convert
-    const todayDate = new Date().toLocaleDateString('en-CA');
-    console.log(todayDate);
     const lastDigit = new Date().toLocaleDateString('en-CA').slice(9, 10);
     const lastTwoDigit = new Date().toLocaleDateString('en-CA').slice(8, 10);
     var tomorrowDate;
@@ -67,12 +65,7 @@ function WeatherCard({todayWeather, notTodayWeather, showWeatherCard}) {
         tomorrowDate = new Date().toLocaleDateString('en-CA').slice(0, 8) + (parseInt(lastTwoDigit) + 1);
         dayAfterDate = new Date().toLocaleDateString('en-CA').slice(0, 8) + (parseInt(lastTwoDigit) + 2);
     }
-
-    // Filter Tomorrow's data
-    // 1. Find the min and max temperature & population
-
-    // Filter Day after tomorrow's data
-    
+ 
     return (
         <div>
             <div className="weather">
@@ -82,7 +75,6 @@ function WeatherCard({todayWeather, notTodayWeather, showWeatherCard}) {
                     <div id="today-info">
                         <p>
                             <a><b>now: {curr} &#8451;</b></a>
-                            
                         </p>
                         <p>
                             <a>min: {todayMin} &#8451; </a>

@@ -15,6 +15,10 @@ function App(){
   const [showInfo, setShowInfo] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
   const [showWeatherCard, setShowWeatherCard] = useState(false);
+  const [todayDate, setTodayDate] = useState('');
+
+  const weatherAPIKey = '';
+  const googleAPIKey = '';
 
   const inputLocationHandler = (e) => {
     setInputLocation(e.target.value);
@@ -28,7 +32,7 @@ function App(){
     }
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&appid=684d6190d51254617c2a54e8dcec9715&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&appid=${weatherAPIKey}&units=metric`
     ).then((res) => {
       if (res.ok) {
         console.log(res.status);
@@ -68,6 +72,44 @@ function App(){
       setShowWeather(true);
       setShowWeatherCard(true);
     }).catch((error) => console.log(error));
+
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${inputLocation}&key=${googleAPIKey}`
+    ).then((res) => {
+      if (res.ok) {
+          console.log(res.status);
+          return res.json();
+      } else {
+          console.log("There is an error for obtaining longitude and latitude!");
+      }
+    }).then((object) => {
+      console.log(object);
+      const geocode_lat = object.results[0].geometry.location.lat;
+      const geocode_lng = object.results[0].geometry.location.lng;
+      console.log(geocode_lat);
+      console.log(geocode_lng);
+      const timestamp = new Date().getTime();
+      console.log(timestamp);
+      fetch(
+        `https://maps.googleapis.com/maps/api/timezone/json?location=${geocode_lat}%2C${geocode_lng}&timestamp=${timestamp}&key=${googleAPIKey}`,
+        {method: 'GET',headers:{}}
+      ).then((res) => {
+        if (res.ok) {
+          console.log(res);
+          console.log(res.data)
+          return res.data;
+        } else {
+            console.log(res.status);
+            console.log("There is something wrong with obtaining the timezone");
+        }
+      }).then((object2) => {
+        console.log(object2);
+        console.log(object2.results);
+        const timezone = object2.timeZoneId;
+        console.log(timezone);
+        setTodayDate(new Date().toLocaleDateString('en-CA', {timeZone: timezone}));
+      });
+    });
   };
 
   return (
@@ -84,6 +126,7 @@ function App(){
         showWeather={showWeather}>
       </City>
       <WeatherCard
+        todayDate={todayDate}
         todayWeather={todayWeather}
         notTodayWeather={notTodayWeather}
         showWeatherCard={showWeatherCard}>
