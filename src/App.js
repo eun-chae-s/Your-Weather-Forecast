@@ -53,7 +53,7 @@ function App(){
     }).catch((error) => console.log(error));
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${inputLocation}&appid=684d6190d51254617c2a54e8dcec9715&units=metric`
+      {OpenWeatherApi}
     ).then((res) => {
       if (res.ok) {
         console.log(res.status);
