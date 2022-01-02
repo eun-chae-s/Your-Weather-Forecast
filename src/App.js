@@ -48,29 +48,25 @@ function App(){
       setTodayWeather(object);
       console.log("today");
       console.log(object);
-      setShowWeather(true);
-      setShowWeatherCard(true);
-    }).catch((error) => console.log(error));
-
-    fetch(
-      {OpenWeatherApi}
-    ).then((res) => {
-      if (res.ok) {
-        console.log(res.status);
-        return res.json();
-      } else {
-        if (res.status === 404) {
-          return alert("Oops, there seems to be an error! (wrong location)");
+      
+      fetch(
+        `http://api.openweathermap.org/data/2.5/forecast?q=${inputLocation}&appid=${weatherAPIKey}&units=metric`
+      ).then((res) => {
+        if (res.ok) {
+          console.log(res.status);
+          return res.json();
         } else {
-          throw new Error("You have an error");
+          if (res.status === 404) {
+            return alert("Oops, there seems to be an error! (wrong location)");
+          } else {
+            throw new Error("You have an error");
+          }
         }
-      }
-    }).then((object) => {
-      setNotTodayWeather(object);
-      console.log("not today");
-      console.log(object);
-      setShowWeather(true);
-      setShowWeatherCard(true);
+      }).then((object) => {
+        setNotTodayWeather(object);
+        console.log("not today");
+        console.log(object);
+      }).catch((error) => console.log(error));
     }).catch((error) => console.log(error));
 
     fetch(
@@ -88,26 +84,27 @@ function App(){
       const geocode_lng = object.results[0].geometry.location.lng;
       console.log(geocode_lat);
       console.log(geocode_lng);
-      const timestamp = new Date().getTime();
+      const timestamp = new Date().getTime() * 0.001;
       console.log(timestamp);
-      fetch(
-        `https://maps.googleapis.com/maps/api/timezone/json?location=${geocode_lat}%2C${geocode_lng}&timestamp=${timestamp}&key=${googleAPIKey}`,
-        {method: 'GET',headers:{}}
-      ).then((res) => {
-        if (res.ok) {
-          console.log(res);
-          console.log(res.data)
-          return res.data;
-        } else {
-            console.log(res.status);
-            console.log("There is something wrong with obtaining the timezone");
+
+      var axios = require('axios');
+      var config = {
+        method: 'get',
+        url: `https://maps.googleapis.com/maps/api/timezone/json?location=${geocode_lat}%2C${geocode_lng}&timestamp=${timestamp}&key=${googleAPIKey}`,
+        headers: {}
+      };
+
+      axios(config).then(
+        function(response) {
+          console.log(response.data);
+          const timezone = response.data["timeZoneId"];
+          console.log(timezone);
+          setTodayDate(new Date().toLocaleDateString('en-CA', {timeZone: timezone}));
+          setShowWeather(true);
+          setShowWeatherCard(true);
         }
-      }).then((object2) => {
-        console.log(object2);
-        console.log(object2.results);
-        const timezone = object2.timeZoneId;
-        console.log(timezone);
-        setTodayDate(new Date().toLocaleDateString('en-CA', {timeZone: timezone}));
+      ).catch(function(error) {
+        console.log(error);
       });
     });
   };
