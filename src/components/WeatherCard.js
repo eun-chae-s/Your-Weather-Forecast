@@ -86,29 +86,46 @@ function WeatherCard({todayDate, todayWeather, notTodayWeather, showWeatherCard}
     const days = {0: 'Monday', 1: 'Tuesday', 2:'Wednesday', 3:'Thursday', 4:'Friday', 5:'Saturday', 6:'Sunday'}
     const day = days[new Date(dayAfterDate).getDay()];
 
-    var tmrMin;
-    var tmrMax;
+    var tmrMin = -100;
+    var tmrMax = 100;
     var tmrImage;
     var tmrPop;
-    var daMin;
-    var daMax;
+    var daMin = -100;
+    var daMax = 100;
     var daImage;
     var daPop;
 
     // Find Tomorrow and Day After Tomorrow's Weather
     notTodayWeather.list.forEach((element) => {
-        if (element.dt_txt === tomorrowDate + ' 09:00:00' || element.dt_txt === tomorrowDate + ' 12:00:00') {
-            tmrMin = element.main.temp_min;
-            tmrMax = element.main.temp_max;
+        if (element.dt_txt === tomorrowDate + ' 12:00:00') {
             tmrImage = findRightImage(element.weather[0].id);
             tmrPop = element.pop;
         }
-        if (element.dt_txt === dayAfterDate + ' 09:00:00' || element.dt_txt === dayAfterDate + ' 12:00:00') {
-            daMin = element.main.temp_min;
-            daMax = element.main.temp_max;
+        
+
+        if (element.dt_txt.includes(tomorrowDate)) {
+            if (element.main.temp_min < tmrMin || tmrMin === -100) {
+                tmrMin = element.main.temp_min;
+            }
+            if (element.main.temp_min >= tmrMax || tmrMax === 100) {
+                tmrMax = element.main.temp_max;
+            }
+            
+        }
+
+        if (element.dt_txt === dayAfterDate + ' 12:00:00') {
             daImage = findRightImage(element.weather[0].id);
             daPop = element.pop;
         }
+
+        if (element.dt_txt.includes(dayAfterDate)) {
+            if (element.main.temp_min < daMin || daMin === -100) {
+                daMin = element.main.temp_min;
+            }
+            if (element.main.temp_min >= daMax || daMax === 100) {
+                daMax = element.main.temp_max;
+            }
+        } 
     })
  
     return (

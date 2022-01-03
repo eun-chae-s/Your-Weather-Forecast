@@ -17,8 +17,8 @@ function App(){
   const [showWeatherCard, setShowWeatherCard] = useState(false);
   const [todayDate, setTodayDate] = useState('');
 
-  const weatherAPIKey = '';
-  const googleAPIKey = '';
+  const weatherAPIKey = '684d6190d51254617c2a54e8dcec9715';
+  const googleAPIKey = 'AIzaSyDUZUhzX63lF-AXdRxUOJxh7u5s22p2AXQ';
 
   const inputLocationHandler = (e) => {
     setInputLocation(e.target.value);

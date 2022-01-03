@@ -1,4 +1,4 @@
-ONEUL
+# ONEUL
 
-- 'ONEUL': today, meaning in Korean
-- A React app that you can check 3-day weather forecast
+- <b>'ONEUL'</b>: today in Korean
+- A Weather forecast app (only for 3 days) using React
